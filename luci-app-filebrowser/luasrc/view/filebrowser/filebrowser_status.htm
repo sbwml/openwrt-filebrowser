@@ -1,0 +1,27 @@
+<script type="text/javascript">//<![CDATA[
+XHR.poll(3, '<%=url([[admin]], [[services]], [[filebrowser]], [[status]])%>', null,
+	function(x, data) {
+		var tb = document.getElementById('filebrowser_status');
+		if (data && tb) {
+			if (data.running) {
+				var links = '<em><b><font color=green><%:File Browser%> <%:RUNNING%></font></b></em><input class="cbi-button-reload mar-10" type="button" value="<%:Enter interface%>" onclick="openwebui();" />';
+				tb.innerHTML = links;
+			} else {
+				tb.innerHTML = '<em><b><font color=red><%:File Browser%> <%:NOT RUNNING%></font></b></em>';
+			}
+		}
+	}
+);
+
+function openwebui(){
+	var url = window.location.host+":<%=luci.sys.exec("uci -q get filebrowser.@global[0].port"):gsub("^%s*(.-)%s*$", "%1")%>";
+	window.open('http://'+url,'target','');
+}
+//]]>
+</script>
+<style>.mar-10 {margin-left: 50px; margin-right: 10px;}</style>
+<fieldset class="cbi-section">
+	<p id="filebrowser_status">
+		<em><%:Collecting data...%></em>
+	</p>
+</fieldset>
