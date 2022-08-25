@@ -13,7 +13,7 @@ PKG_RELEASE:=2
 
 LUCI_TITLE:=LuCI support for FileBrowser
 LUCI_PKGARCH:=all
-LUCI_DEPENDS:=+filebrowser
+LUCI_DEPENDS:=+filebrowser +luci-compat
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
